@@ -23,10 +23,43 @@ public class Board{
 		private String getMiddle(){
 			return (int)Math.floor(this.x/2)+"-"+(int)Math.floor(this.y/2);
 		}
+		//@method checkTheMiddle will check if there is something in the middle
+		private boolean checkTheMiddle(){
+			return getMiddle().equals("X") || getMiddle.equals("O") ? true : false;
+		}
 		//@method checkTheWinner will check if the player a winner or not
-		public boolean checkTheWinner()
+		public boolean checkTheWinner(boolean player)
 		{
-			
+			if (checkTheMiddle() && player)
+			{
+				 int counter = 0;
+				 for(int i=0;i<x;i++)
+				 {
+				 	for(int j=i;j<y;j++)
+				 	{
+				 		if (matrix[i][j].equals("X"))
+				 			counter++;
+				 	}	
+				 }
+				 if(counter==x)
+				 	return true;
+			}
+			else if(checkTheMiddle() && !player)
+			{
+				int counter= 0;
+				for(int i=0;i<x;i++)
+				{
+					for(int j=i;j<x;j++)
+					{
+						if(matrix[i][j].equals("O"))
+							counter++;
+					}
+				}
+				return true;
+			}
+
+
+
 		}
 		//isFirst method will check if its a first or a second player
 		public boolean isFirst(boolean player){
