@@ -205,15 +205,35 @@ public class Board{
 		private boolean isFirst(boolean player){
 			return player ? true : false;
 		}
+		//Check whether the cell is empty 
+		private boolean isAvailable(int x, int y){
+			return matrix[x][y].equals("_") ? true : false;
 
+		}
+		//@mthod makeMove will check if the cell is available or not
 		public void makeMove(int x,int y,boolean flag)
 		{
+			boolean fuck = isAvailable(x,y);
+			System.out.print(flag+" is ");
+			if(isAvailable(x,y)){
 			if (isFirst(flag))
 				matrix[x][y]="X";
 				else
 					matrix[x][y]="O";	
-			
-		}
+			}
+			else{
+				
+					System.out.print("Cell is already taken");
+					System.out.print("Please make another move");
+                                        Scanner scan = new Scanner(System.in);
+                                        System.out.print("Please re-enter x ");
+                                        x=scan.nextInt();
+                                        Scanner scan2 = new Scanner(System.in);
+                                        System.out.print("Please re-enter y ");
+                                        y=scan2.nextInt();
+					makeMove(x,y,flag);
+				}
+			}
 		//dummy function to check the board
 		public void print()
 		{

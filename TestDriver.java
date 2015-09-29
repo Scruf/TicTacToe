@@ -7,13 +7,13 @@ public class TestDriver{
 		Board board = new Board(3,3);
 		player1.makeMove("0","1");
 		board.makeMove(player1.getXcord(),player1.getYcord(),player1.getTheTurn());
-		player1.makeMove("1","1");
-		board.makeMove(player1.getXcord(),player1.getYcord(),player1.getTheTurn());
-		player1.makeMove("2","1");
-		board.makeMove(player1.getXcord(),player1.getYcord(),player1.getTheTurn());
-		board.print();
-		/*player1.makeMove("2","2");*/
+		player2.makeMove("0","1");
+		board.makeMove(player2.getXcord(),player2.getYcord(),player2.getTheTurn());
+		player2.makeMove("2","1");
+		board.makeMove(player2.getXcord(),player2.getYcord(),player2.getTheTurn());
 		
+		/*player1.makeMove("2","2");*/
+		//Player class must be retested 
 		boolean flag = board.isWinner(player1.getTheTurn());
 		if (flag)
 			System.out.print("First win");
