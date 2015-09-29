@@ -1,7 +1,7 @@
 public class Board{
-	private String [][]matrix;
-	private int x;
-	private int y;
+	protected String [][]matrix;
+	protected int x;
+	protected int y;
 		Board(int x,int y)
 		{
 			this.x=x;
@@ -11,7 +11,7 @@ public class Board{
 		}
 		//@method fiil will fill the matrix with underscores 
 		//mainly for the appearance and lol with gigles
-		private String [][]fill()
+		protected String [][]fill()
 		{
 			for(int i=0;i<this.x;i++)
 				for(int j=0;j<this.y;j++)
@@ -20,11 +20,11 @@ public class Board{
 		}
 		//@method getMiddle will return the middle position so 
 		//the efficient search can be performed
-		private String getMiddle(){
+		protected String getMiddle(){
 			return (int)Math.floor(this.x/2)+"-"+(int)Math.floor(this.y/2);
 		}
 		//@method checkTheMiddle will check if there is something in the middle
-		private boolean checkTheMiddle(){
+		protected boolean checkTheMiddle(){
 			int i=Integer.parseInt(getMiddle().split("-")[0]);
 			int j=Integer.parseInt(getMiddle().split("-")[1]);
 			return matrix[i][j].equals("X") || matrix[i][j].equals("O") ? true : false;
@@ -32,7 +32,7 @@ public class Board{
 		//@method checkDiagonal will check the diagonal 
 		//if the player a winner or not 
 		
-		private boolean checkDiagonaleForPlayer()
+		protected boolean checkDiagonaleForPlayer()
 		{
 			if (checkTheMiddle() )
 			{
@@ -107,7 +107,7 @@ public class Board{
 			return false;
 		}
 		//@method checkColum will check fif the user win by colum
-		private boolean checkColum(){
+		protected boolean checkColum(){
 		//chech the first player
 			for(int i=0;i<x;i++)
 			{
@@ -142,7 +142,7 @@ public class Board{
 			return false;
 		}
 		//@param rowWithEL will find the right row with element
-		private boolean checkTheRow()
+		protected boolean checkTheRow()
 		{
 
 			int rowWithEl = 0;
@@ -202,11 +202,11 @@ public class Board{
 		
 		}
 		//isFirst method will check if its a first or a second player
-		private boolean isFirst(boolean player){
+		protected boolean isFirst(boolean player){
 			return player ? true : false;
 		}
 		//Check whether the cell is empty 
-		private boolean isAvailable(int x, int y){
+		protected boolean isAvailable(int x, int y){
 			return matrix[x][y].equals("_") ? true : false;
 
 		}
