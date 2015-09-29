@@ -5,17 +5,20 @@ public class TestDriver{
 		Player player1 = new Player(true);
 		Player player2 = new Player(false);
 		Board board = new Board(3,3);
-		player2.makeMove("0","2");
+		player1.makeMove("0","1");
 		board.makeMove(player1.getXcord(),player1.getYcord(),player1.getTheTurn());
-		player2.makeMove("1","1");
+		player1.makeMove("1","1");
 		board.makeMove(player1.getXcord(),player1.getYcord(),player1.getTheTurn());
-		player2.makeMove("2","0");
+		player1.makeMove("2","1");
 		board.makeMove(player1.getXcord(),player1.getYcord(),player1.getTheTurn());
-		/*player2.makeMove("2","2");*/
+		board.print();
+		/*player1.makeMove("2","2");*/
 		
-		boolean flag = board.isWinner();
-		if (!flag)
+		boolean flag = board.isWinner(player1.getTheTurn());
+		if (flag)
 			System.out.print("First win");
+		else
+			System.out.print("Second win");
 		
 		
 	}

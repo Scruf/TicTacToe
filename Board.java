@@ -31,7 +31,7 @@ public class Board{
 		}
 		//@method checkDiagonal will check the diagonal 
 		//if the player a winner or not 
-		//
+		
 		private boolean checkDiagonaleForPlayer()
 		{
 			if (checkTheMiddle() )
@@ -106,14 +106,106 @@ public class Board{
 			}
 			return false;
 		}
+		//@method checkColum will check fif the user win by colum
+		private boolean checkColum(){
+		//chech the first player
+			for(int i=0;i<x;i++)
+			{
+				int counter = 0;
+				for(int j=0;j<y;j++)
+				{
+					if(matrix[i][j].equals("X"))
+						counter++;
+					else
+						break;
+				}
+				if(counter==x)
+					return true;
+				else
+					counter=0;
+			}
+			for(int i=0;i<x;i++)
+			{
+				int counter = 0;
+				for(int j=0;j<y;j++)
+				{
+					if(matrix[i][j].equals("O"))
+						counter++;
+					else
+						break;
+				}
+				if(counter==x)
+					return true;
+				else
+					counter=0;
+			}
+			return false;
+		}
+		//@param rowWithEL will find the right row with element
+		private boolean checkTheRow()
+		{
+
+			int rowWithEl = 0;
+			for(int i=0;i<x;i++)
+			{
+				
+				
+				if(!matrix[0][i].equals("_") && matrix[0][i].equals("X"))
+				{
+					
+					int counter=0;
+					
+					for(int j=0;j<x;j++){
+						if(matrix[j][rowWithEl].equals("X"))
+							counter++;
+						else
+							break;
+						
+					}
+					System.out.print(counter);
+					if(counter==x)
+						return true;
+					
+				}
+				rowWithEl++;
+			}
+			rowWithEl=0;
+			for(int i=0;i<x;i++)
+			{
+				
+				
+				if(!matrix[0][i].equals("_") && matrix[0][i].equals("O"))
+				{
+					
+					int counter=0;
+					
+					for(int j=0;j<x;j++){
+						if(matrix[j][rowWithEl].equals("O"))
+							counter++;
+						else
+							break;
+						
+					}
+					System.out.print(counter);
+					if(counter==x)
+						return true;
+					
+				}
+				rowWithEl++;
+			}
+			return false;
+		}
 		//@method is a winner will check if the player is a winner
-		public boolean isWinner(){
-			return checkDiagonaleForPlayer();
+		public boolean isWinner(boolean player){
+
+			return isFirst(player) && (checkDiagonaleForPlayer() || checkColum() ||checkTheRow()) ? true : false;
+		
 		}
 		//isFirst method will check if its a first or a second player
-		public boolean isFirst(boolean player){
+		private boolean isFirst(boolean player){
 			return player ? true : false;
 		}
+
 		public void makeMove(int x,int y,boolean flag)
 		{
 			if (isFirst(flag))
