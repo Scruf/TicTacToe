@@ -25,41 +25,90 @@ public class Board{
 		}
 		//@method checkTheMiddle will check if there is something in the middle
 		private boolean checkTheMiddle(){
-			return getMiddle().equals("X") || getMiddle.equals("O") ? true : false;
+			int i=Integer.parseInt(getMiddle().split("-")[0]);
+			int j=Integer.parseInt(getMiddle().split("-")[1]);
+			return matrix[i][j].equals("X") || matrix[i][j].equals("O") ? true : false;
 		}
-		//@method checkTheWinner will check if the player a winner or not
-		public boolean checkTheWinner(boolean player)
+		//@method checkDiagonal will check the diagonal 
+		//if the player a winner or not 
+		//
+		private boolean checkDiagonaleForPlayer()
 		{
-			if (checkTheMiddle() && player)
+			if (checkTheMiddle() )
 			{
-				 int counter = 0;
-				 for(int i=0;i<x;i++)
-				 {
-				 	for(int j=i;j<y;j++)
-				 	{
-				 		if (matrix[i][j].equals("X"))
-				 			counter++;
-				 	}	
-				 }
-				 if(counter==x)
-				 	return true;
-			}
-			else if(checkTheMiddle() && !player)
-			{
-				int counter= 0;
-				for(int i=0;i<x;i++)
+				
+				if(!matrix[0][0].equals("_"))
 				{
-					for(int j=i;j<x;j++)
+					int counter=0;
+					for(int i=0;i<x;i++)
 					{
-						if(matrix[i][j].equals("O"))
-							counter++;
+						for(int j=i;j<y;j++){
+							if(matrix[i][j].equals("X"))
+								counter++;
+						}
+					}
+				
+					if(counter==x)
+						return true;
+					
+					
+				}
+				else{
+					int counter=0;
+					if(!matrix[0][y-1].equals("_"))
+					{
+						for(int i=0;i<x;i++)
+						{
+							for(int j=x-1;j>=0;j--)
+							{
+								if(matrix[i][j].equals("X"))
+									counter++;
+							}
+						}
+						if(counter==x)
+							return true;
 					}
 				}
-				return true;
+			}else if(!checkTheMiddle() ){
+			
+				if(!matrix[0][0].equals("_"))
+				{
+					int counter=0;
+					for(int i=0;i<x;i++)
+					{
+						for(int j=x;j<y;j++){
+							if(matrix[i][j].equals("O"))
+								counter++;
+						}
+					}
+					if(counter==x-1)
+						return true;
+				}
+				else{
+					int counter=0;
+					if(!matrix[x-1][y-1].equals("_"))
+					{
+						for(int i=0;i<x;i++)
+						{
+							for(int j=x-1;j>=0;j--)
+							{
+								if(matrix[i][j].equals("O"))
+									counter++;
+							}
+						}
+						if(counter==x)
+							return true;
+					}
+				}
 			}
-
-
-
+			else{
+				return false;
+			}
+			return false;
+		}
+		//@method is a winner will check if the player is a winner
+		public boolean isWinner(){
+			return checkDiagonaleForPlayer();
 		}
 		//isFirst method will check if its a first or a second player
 		public boolean isFirst(boolean player){
