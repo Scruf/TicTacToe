@@ -203,10 +203,29 @@ public class Board{
 			return false;
 		}
 		//@method is a winner will check if the player is a winner
-		public boolean isWinner(boolean player){
+		public void isWinner(boolean player){
+			if(player && (checkDiagonaleForPlayer() || checkColum() ||checkTheRow()))
+			{
+				System.out.print("Player X won");
+				System.exit(1);
+			}
+			else if(!player)
+			{
+				 if (checkDiagonaleForPlayer() || checkColum() ||checkTheRow())
+				 {
+				 	System.out.print("Player O won ") ;
+				 	System.exit(1);
+				 }
+				 	
 
-			return isFirst(player) && (checkDiagonaleForPlayer() || checkColum() ||checkTheRow()) ? true : false;
+			}
+			
 		
+		}
+		//@method check the draw
+		public boolean isDraw()
+		{
+			return (checkDiagonaleForPlayer() || checkColum() ||checkTheRow()) ? true : false;
 		}
 		//isFirst method will check if its a first or a second player
 		protected boolean isFirst(boolean player){
