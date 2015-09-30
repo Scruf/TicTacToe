@@ -16,6 +16,10 @@ public class Human extends Player{
 		this.xCoord = Integer.parseInt(x);
 		this.yCoord = Integer.parseInt(y);
 	}
+	public boolean isAvailable(String str1){
+			return str1.equals("_") ? true : false;
+		}
+	
 	//@method move will retrive the move
 	public String move(){return this.xCoord+"-"+this.yCoord;}
 	//@method getXcord will return the x coordinates
