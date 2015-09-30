@@ -20,7 +20,7 @@ public class ComputerBad extends Player{
 			return str1.equals("_") ? true : false;
 		}
 	
-	
+		public boolean getTheTurn(){return this.player;}
 		public String move(){
 			
 			if(yC<0 && xC<0)
@@ -43,11 +43,15 @@ public class ComputerBad extends Player{
 			return " ";
 			
 		}
-		public int getXcoordinates()
+		public void makeMove(String x,String y){
+			this.x = Integer.parseInt(x);
+			this.y = Integer.parseInt(y);
+		}
+		public int getXcord()
 		{
 			return this.x;
 		}
-		public int getYcoordnates()
+		public int getYcord()
 		{
 			return this.y;
 		}

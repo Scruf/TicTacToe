@@ -8,5 +8,9 @@ public abstract class Player{
 			this.turn = turn;
 		}
 		public abstract String move();
+		public abstract void makeMove(String x,String y);
+		public abstract int getXcord();
+		public abstract int getYcord();
+		public abstract boolean getTheTurn();
 		public abstract boolean isAvailable(String str1);
 }
