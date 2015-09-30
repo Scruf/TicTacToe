@@ -1,13 +1,20 @@
 public class Board{
 	protected String [][]matrix;
-	protected int x;
-	protected int y;
+	protected  int x;
+	protected  int y;
 		Board(int x,int y)
 		{
 			this.x=x;
 			this.y=y;
 			matrix = new String[x][y];
 			fill();
+		}
+		protected int getX()
+		{
+			return x;
+		}
+		protected int getY(){
+			return y;
 		}
 		//@method fiil will fill the matrix with underscores 
 		//mainly for the appearance and lol with gigles
@@ -162,7 +169,7 @@ public class Board{
 							break;
 						
 					}
-					System.out.print(counter);
+					
 					if(counter==x)
 						return true;
 					
@@ -186,7 +193,7 @@ public class Board{
 							break;
 						
 					}
-					System.out.print(counter);
+					
 					if(counter==x)
 						return true;
 					
@@ -210,11 +217,14 @@ public class Board{
 			return matrix[x][y].equals("_") ? true : false;
 
 		}
+		public String getContent(int x,int y){
+			return matrix[x][y];
+		}
 		//@mthod makeMove will check if the cell is available or not
 		public void makeMove(int x,int y,boolean flag)
 		{
-			boolean fuck = isAvailable(x,y);
-			System.out.print(flag+" is ");
+			
+		
 			if(isAvailable(x,y)){
 			if (isFirst(flag))
 				matrix[x][y]="X";
@@ -222,8 +232,8 @@ public class Board{
 					matrix[x][y]="O";	
 			}
 			else{
-				
-					System.out.print("Cell is already taken");
+					
+					/*System.out.print("Cell is already taken");
 					System.out.print("Please make another move");
                                         Scanner scan = new Scanner(System.in);
                                         System.out.print("Please re-enter x ");
@@ -231,7 +241,7 @@ public class Board{
                                         Scanner scan2 = new Scanner(System.in);
                                         System.out.print("Please re-enter y ");
                                         y=scan2.nextInt();
-					makeMove(x,y,flag);
+					makeMove(x,y,flag);*/
 				}
 			}
 		//dummy function to check the board
