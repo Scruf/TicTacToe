@@ -1,3 +1,6 @@
+//Recognition of players is not working as it supposed to
+//Check for the x player or O player
+//
 public class Board{
 	protected String [][]matrix;
 	protected  int x;
@@ -39,8 +42,13 @@ public class Board{
 		//@method checkDiagonal will check the diagonal 
 		//if the player a winner or not 
 		
-		protected boolean checkDiagonaleForPlayer()
+		protected boolean checkDiagonaleForPlayer(boolean player)
 		{
+			String compar = " ";
+			if(player)
+				compar="X";
+			else
+				compar="O";
 			if (checkTheMiddle() )
 			{
 				
@@ -50,7 +58,7 @@ public class Board{
 					for(int i=0;i<x;i++)
 					{
 						for(int j=i;j<y;j++){
-							if(matrix[i][j].equals("X"))
+							if(matrix[i][j].equals(compar))
 								counter++;
 						}
 					}
@@ -68,38 +76,7 @@ public class Board{
 						{
 							for(int j=x-1;j>=0;j--)
 							{
-								if(matrix[i][j].equals("X"))
-									counter++;
-							}
-						}
-						if(counter==x)
-							return true;
-					}
-				}
-			}else if(!checkTheMiddle() ){
-			
-				if(!matrix[0][0].equals("_"))
-				{
-					int counter=0;
-					for(int i=0;i<x;i++)
-					{
-						for(int j=x;j<y;j++){
-							if(matrix[i][j].equals("O"))
-								counter++;
-						}
-					}
-					if(counter==x-1)
-						return true;
-				}
-				else{
-					int counter=0;
-					if(!matrix[x-1][y-1].equals("_"))
-					{
-						for(int i=0;i<x;i++)
-						{
-							for(int j=x-1;j>=0;j--)
-							{
-								if(matrix[i][j].equals("O"))
+								if(matrix[i][j].equals(compar))
 									counter++;
 							}
 						}
@@ -114,14 +91,19 @@ public class Board{
 			return false;
 		}
 		//@method checkColum will check fif the user win by colum
-		protected boolean checkColum(){
+		protected boolean checkColum(boolean player){
 		//chech the first player
+			String compar = " ";
+			if(player)
+				compar="X";
+			else
+				compar="O";
 			for(int i=0;i<x;i++)
 			{
 				int counter = 0;
 				for(int j=0;j<y;j++)
 				{
-					if(matrix[i][j].equals("X"))
+					if(matrix[i][j].equals(compar))
 						counter++;
 					else
 						break;
@@ -131,39 +113,29 @@ public class Board{
 				else
 					counter=0;
 			}
-			for(int i=0;i<x;i++)
-			{
-				int counter = 0;
-				for(int j=0;j<y;j++)
-				{
-					if(matrix[i][j].equals("O"))
-						counter++;
-					else
-						break;
-				}
-				if(counter==x)
-					return true;
-				else
-					counter=0;
-			}
+			
 			return false;
 		}
 		//@param rowWithEL will find the right row with element
-		protected boolean checkTheRow()
+		protected boolean checkTheRow(boolean player)
 		{
-
+			String compar = " ";
+			if(player)
+				compar="X";
+			else
+				compar="O";
 			int rowWithEl = 0;
 			for(int i=0;i<x;i++)
 			{
 				
 				
-				if(!matrix[0][i].equals("_") && matrix[0][i].equals("X"))
+				if(!matrix[0][i].equals("_") && matrix[0][i].equals(compar))
 				{
 					
 					int counter=0;
 					
 					for(int j=0;j<x;j++){
-						if(matrix[j][rowWithEl].equals("X"))
+						if(matrix[j][rowWithEl].equals(compar))
 							counter++;
 						else
 							break;
@@ -176,57 +148,34 @@ public class Board{
 				}
 				rowWithEl++;
 			}
-			rowWithEl=0;
-			for(int i=0;i<x;i++)
-			{
-				
-				
-				if(!matrix[0][i].equals("_") && matrix[0][i].equals("O"))
-				{
-					
-					int counter=0;
-					
-					for(int j=0;j<x;j++){
-						if(matrix[j][rowWithEl].equals("O"))
-							counter++;
-						else
-							break;
-						
-					}
-					
-					if(counter==x)
-						return true;
-					
-				}
-				rowWithEl++;
-			}
+			
+			
 			return false;
 		}
 		//@method is a winner will check if the player is a winner
 		public void isWinner(boolean player){
-			if(player && (checkDiagonaleForPlayer() || checkColum() ||checkTheRow()))
+			
+			
+			if(player && (checkDiagonaleForPlayer(player) || checkColum(player) ||checkTheRow(player)))
 			{
+				
+				
 				System.out.print("Player X won");
 				System.exit(1);
 			}
-			else if(!player)
-			{
-				 if (checkDiagonaleForPlayer() || checkColum() ||checkTheRow())
-				 {
-				 	System.out.print("Player O won ") ;
-				 	System.exit(1);
-				 }
-				 	
-
+			else if(!player && (checkDiagonaleForPlayer(player) || checkColum(player) ||checkTheRow(player))){
+				System.out.print("Player O won");
+				System.exit(1);
 			}
-			
-		
+			else
+				System.out.println();
 		}
+
 		//@method check the draw
-		public boolean isDraw()
+		/*public boolean isDraw()
 		{
-			return (checkDiagonaleForPlayer() || checkColum() ||checkTheRow()) ? true : false;
-		}
+			return !(checkDiagonaleForPlayer() || checkColum() ||checkTheRow()) ? true : false;
+		}*/
 		//isFirst method will check if its a first or a second player
 		protected boolean isFirst(boolean player){
 			return player ? true : false;
@@ -244,24 +193,12 @@ public class Board{
 		{
 			
 		
-			if(isAvailable(x,y)){
+			
 			if (isFirst(flag))
 				matrix[x][y]="X";
 				else
 					matrix[x][y]="O";	
-			}
-			else{
-					
-					/*System.out.print("Cell is already taken");
-					System.out.print("Please make another move");
-                                        Scanner scan = new Scanner(System.in);
-                                        System.out.print("Please re-enter x ");
-                                        x=scan.nextInt();
-                                        Scanner scan2 = new Scanner(System.in);
-                                        System.out.print("Please re-enter y ");
-                                        y=scan2.nextInt();
-					makeMove(x,y,flag);*/
-				}
+			
 			}
 		//dummy function to check the board
 		public void print()
