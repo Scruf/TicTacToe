@@ -5,6 +5,8 @@ public class Board{
 	protected String [][]matrix;
 	protected  int x;
 	protected  int y;
+	private int coordX;
+	private int coordY;
 		Board(int x,int y)
 		{
 			this.x=x;
@@ -152,6 +154,9 @@ public class Board{
 			
 			return false;
 		}
+		public String [][]content(){
+			return matrix;
+		}
 		//@method is a winner will check if the player is a winner
 		public void isWinner(boolean player){
 			
@@ -193,13 +198,18 @@ public class Board{
 		{
 			
 		
-			
+			this.coordX=x;
+			this.coordY=y;
 			if (isFirst(flag))
 				matrix[x][y]="X";
 				else
 					matrix[x][y]="O";	
 			
 			}
+		public String getMove()
+		{
+			return this.coordX+" "+this.coordY;
+		}
 		//dummy function to check the board
 		public void print()
 		{
